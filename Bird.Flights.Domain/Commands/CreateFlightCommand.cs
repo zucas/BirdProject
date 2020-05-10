@@ -26,6 +26,7 @@ namespace Bird.Flights.Domain.Commands
         public DateTime Sta { get; set; }
         public string Aircraft { get; set; }
 
+
         public void Validate()
         {
             AddNotifications(
