@@ -1,12 +1,10 @@
 ﻿using Bird.Flights.Domain.Commands;
+using Bird.Flights.Domain.Entities;
 using Bird.Flights.Domain.Repositories;
 using Bird.Shared.Commands;
 using Bird.Shared.Commands.Contracts;
 using Bird.Shared.Handlers.Contracts;
 using Flunt.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bird.Flights.Domain.Handlers
 {
@@ -27,13 +25,13 @@ namespace Bird.Flights.Domain.Handlers
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
 
-            var todo = new TodoItem(command.Title, command.User, command.Date);
+            var flight = new Flight(command.FlightNumber, command.Departure, command.Arrival, command.Std, command.Sta, command.Aircraft);
 
             // Salva no banco
-            _repository.Create(todo);
+            _repository.Create(flight);
 
             // Retorna o resultado
-            return new GenericCommandResult(true, "Tarefa salva", todo);
+            return new GenericCommandResult(true, "Flight save!", flight);
         }
     }
 }

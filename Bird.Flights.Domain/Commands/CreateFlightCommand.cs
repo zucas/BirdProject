@@ -9,8 +9,9 @@ namespace Bird.Flights.Domain.Commands
 {
     public class CreateFlightCommand : Notifiable, ICommand
     {
-        public CreateFlightCommand(string departure, string arrival, DateTime std, DateTime sta, string aircraft)
+        public CreateFlightCommand(string flightNumber, string departure, string arrival, DateTime std, DateTime sta, string aircraft)
         {
+            FlightNumber = flightNumber;
             Departure = departure;
             Arrival = arrival;
             Std = std;
@@ -18,6 +19,7 @@ namespace Bird.Flights.Domain.Commands
             Aircraft = aircraft;
         }
 
+        public string FlightNumber { get; set; }
         public string Departure { get; set; }
         public string Arrival { get; set; }
         public DateTime Std { get; set; }

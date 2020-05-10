@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Bird.Shared.Commands.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bird.Shared.Commands
 {
-    public class GenericCommandResult
+    public class GenericCommandResult : ICommandResult
     {
         public GenericCommandResult() { }
 
