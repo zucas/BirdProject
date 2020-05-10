@@ -8,13 +8,13 @@ using Flunt.Notifications;
 
 namespace Bird.Flights.Domain.Handlers
 {
-    class FlightHadler :
+    public class FlightHandler :
         Notifiable,
         IHandler<CreateFlightCommand>
     {
         private readonly IFlightRepository _repository;
 
-        public FlightHadler(IFlightRepository repository)
+        public FlightHandler(IFlightRepository repository)
         {
             _repository = repository;
         }

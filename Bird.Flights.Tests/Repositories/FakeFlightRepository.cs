@@ -9,7 +9,7 @@ namespace Bird.Flights.Tests.Repositories
     {
         void IFlightRepository.Create(Flight flight)
         {
-            throw new NotImplementedException();
+            
         }
 
         IEnumerable<Flight> IFlightRepository.GetAll(string id)
