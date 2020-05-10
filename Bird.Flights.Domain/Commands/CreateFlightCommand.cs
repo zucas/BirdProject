@@ -31,6 +31,8 @@ namespace Bird.Flights.Domain.Commands
             AddNotifications(
                 new Contract()
                     .Requires()
+                    .HasMinLen(FlightNumber, 1, "FlightNumber", "The Flight Number must be 1 or more chars")
+                    .HasMaxLen(FlightNumber, 4, "FlightNumber", "The Flight Number must be 4 or less chars")
                     .HasLen(Departure, 3, "Departure", "The Departure IATA Code is incorrect")
                     .HasLen(Arrival, 3, "Arrival", "The Arrival IATA Code is incorrect")
                     .IsGreaterThan(Sta, Std, "Sta", "STA must be after STD")
