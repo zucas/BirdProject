@@ -18,12 +18,13 @@ namespace Bird.Flights.Infra.Repositories {
 
         public void Create(Flight flight)
         {
-            throw new NotImplementedException();
+            _context.Flights.Add(flight);
+            _context.SaveChanges();
         }
 
-        public IEnumerable<Flight> GetAll(string id)
+        public IEnumerable<Flight> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Flights;
         }
 
         public Flight GetById(Guid id)

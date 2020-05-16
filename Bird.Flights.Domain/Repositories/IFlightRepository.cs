@@ -10,7 +10,7 @@ namespace Bird.Flights.Domain.Repositories
         void Create(Flight flight);
         void Update(Flight flight);
         Flight GetById(Guid id);
-        IEnumerable<Flight> GetAll(string id);
+        IEnumerable<Flight> GetAll();
         IEnumerable<Flight> GetByPeriod(DateTime date);
     }
 }

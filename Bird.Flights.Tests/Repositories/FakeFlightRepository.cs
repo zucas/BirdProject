@@ -12,7 +12,7 @@ namespace Bird.Flights.Tests.Repositories
             
         }
 
-        IEnumerable<Flight> IFlightRepository.GetAll(string id)
+        IEnumerable<Flight> IFlightRepository.GetAll()
         {
             throw new NotImplementedException();
         }
