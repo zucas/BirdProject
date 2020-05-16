@@ -4,5 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bird.Flights.Infra\Bird.Flights.Infra.csproj" />
+    <ProjectReference Include="..\Bird.Flights.Domain\Bird.Flights.Domain.csproj" />
+  </ItemGroup>
+
 
 </Project>

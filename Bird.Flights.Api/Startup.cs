@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Bird.Flights.Infra.Contexts;
+using Bird.Flights.Infra.Repositories;
+using Bird.Flights.Domain.Handlers;
+using Bird.Flights.Domain.Repositories;
 
 namespace Bird.Flights.Api
 {
@@ -25,7 +24,11 @@ namespace Bird.Flights.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FlightDataContext>(opt => opt.UseInMemoryDatabase("Database"));
             services.AddControllers();
+
+            services.AddTransient<IFlightRepository, FlightRepository>();
+            services.AddTransient<FlightHandler, FlightHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
