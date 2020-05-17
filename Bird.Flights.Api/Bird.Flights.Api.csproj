@@ -6,11 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bird.Flights.Infra\Bird.Flights.Infra.csproj" />
     <ProjectReference Include="..\Bird.Flights.Domain\Bird.Flights.Domain.csproj" />
+    <ProjectReference Include="..\Bird.Flights.Infra\Bird.Flights.Infra.csproj" />
   </ItemGroup>
 
 

@@ -11,8 +11,8 @@ namespace Bird.Flights.Tests.HandlerTest
     [TestClass]
     public class CreateFlightCommandTest
     {
-        private readonly CreateFlightCommand _invalidFlight = new CreateFlightCommand("LA", "3000", "", "CGH", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
-        private readonly CreateFlightCommand _validFlight = new CreateFlightCommand("LA", "3000", "CWB", "CGH", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
+        private readonly CreateFlightCommand _invalidFlight = new CreateFlightCommand("LA", "3000", "TAM3000", "1600", "0100","", "CGH", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
+        private readonly CreateFlightCommand _validFlight = new CreateFlightCommand("LA", "3000", "TAM3000", "1600", "0100","CWB", "CGH", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
         private readonly FlightHandler _handler = new FlightHandler(new FakeFlightRepository());
         private GenericCommandResult _result = new GenericCommandResult();
         public CreateFlightCommandTest()
