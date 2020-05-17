@@ -12,9 +12,9 @@ namespace Bird.Flights.Domain.Commands
     {
 
         public CreateFlightCommand() { }
-        public CreateFlightCommand(string iataCode, string flightNumber, string callsing, string eet, string eobt, string departure, string arrival, DateTime std, DateTime sta, string aircraftType)
+        public CreateFlightCommand(string icaoCode, string flightNumber, string callsing, string eet, string eobt, string departure, string arrival, DateTime std, DateTime sta, string aircraftType)
         {
-            IataCode = iataCode;
+            IcaoCode = icaoCode;
             FlightNumber = flightNumber;
             Callsing = callsing;
             Eet = eet;
@@ -26,7 +26,7 @@ namespace Bird.Flights.Domain.Commands
             AircraftType = aircraftType;
         }
 
-        public string IataCode { get; private set; }
+        public string IcaoCode { get; private set; }
         public string FlightNumber { get; private set; }
         public string Callsing { get; private set; }
         public string Eet { get; private set; }
@@ -44,7 +44,7 @@ namespace Bird.Flights.Domain.Commands
                     .Requires()
                     .HasMinLen(FlightNumber, 1, "FlightNumber", "The Flight Number must be 1 or more chars")
                     .HasMaxLen(FlightNumber, 4, "FlightNumber", "The Flight Number must be 4 or less chars")
-                    .HasLen(IataCode, 2, "IataCode", "The IATA Code is incorrect")
+                    .HasLen(IcaoCode, 3, "IcaoCode", "The ICAO Code is incorrect")
                     .HasLen(Departure, 3, "Departure", "The Departure IATA Code is incorrect")
                     .HasLen(Arrival, 3, "Arrival", "The Arrival IATA Code is incorrect")
                     .IsGreaterThan(Sta, Std, "Sta", "STA must be after STD")

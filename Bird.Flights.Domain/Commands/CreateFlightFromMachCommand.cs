@@ -14,10 +14,12 @@ namespace Bird.Flights.Domain.Commands
         public CreateFlightFromMachCommand() { }
 
         public string departure { get; set; }
+        public string company { get; set; }
         public string arrival { get; set; }
         public string callsign { get; set; }
         public string eobt { get; set; }
         public string eet { get; set; }
+        public string aircraft { get; set; }
 
 
 

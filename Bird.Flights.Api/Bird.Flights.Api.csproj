@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Bird.Flights.Domain\Bird.Flights.Domain.csproj" />
     <ProjectReference Include="..\Bird.Flights.Infra\Bird.Flights.Infra.csproj" />
+    <ProjectReference Include="..\Bird.Shared\Bird.Shared.csproj" />
   </ItemGroup>
 
 

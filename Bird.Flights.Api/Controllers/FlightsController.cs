@@ -38,18 +38,19 @@ namespace Bird.Flights.Api.Controllers {
         
         [Route("import/mach")]
         [HttpGet]
-        public async Task<List<CreateFlightFromMachCommand>> ImportFromMachAsync(
+        public async Task<GenericCommandResult> ImportFromMachAsync(
             [FromServices]FlightHandler handler
         )
         {
 
-            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights?company=TAM&departure=SBRP");
+            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights?company=TAM");
             var data = await response.Content.ReadAsStreamAsync();
-            var flights = await JsonSerializer.DeserializeAsync<List<CreateFlightFromMachCommand>>(data);
-            return flights;
-            // var jsonString = JsonSerializer.Deserialize(JsonSerializer.Serialize(data));
-            //return 
-            // return new GenericCommandResult(true, "The Flights has been imported", response);
+            var commands = await JsonSerializer.DeserializeAsync<List<CreateFlightFromMachCommand>>(data);
+            foreach(var command in commands)
+            {
+                handler.Handle(command);
+            }
+            return new GenericCommandResult(true, "The Flights has been imported", commands);
         }
     }
 }

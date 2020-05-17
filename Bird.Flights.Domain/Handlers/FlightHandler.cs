@@ -1,9 +1,11 @@
-﻿using Bird.Flights.Domain.Commands;
+﻿using System;
+using Bird.Flights.Domain.Commands;
 using Bird.Flights.Domain.Entities;
 using Bird.Flights.Domain.Repositories;
 using Bird.Shared.Commands;
 using Bird.Shared.Commands.Contracts;
 using Bird.Shared.Handlers.Contracts;
+using Bird.Shared.Utils;
 using Flunt.Notifications;
 
 namespace Bird.Flights.Domain.Handlers
@@ -25,7 +27,7 @@ namespace Bird.Flights.Domain.Handlers
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
 
-            var flight = new Flight(command.IataCode, command.FlightNumber, command.Callsing, command.Eet, command.Eobt, command.Departure, command.Arrival, command.Std, command.Sta, command.AircraftType);
+            var flight = new Flight(command.IcaoCode, command.FlightNumber, command.Callsing, command.Eet, command.Eobt, command.Departure, command.Arrival, command.Std, command.AircraftType);
 
             // Salva no banco
             _repository.Create(flight);
@@ -39,8 +41,7 @@ namespace Bird.Flights.Domain.Handlers
             command.Validate();
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
-
-            var flight = new Flight();
+            var flight = new Flight(command.company, command.callsign.Substring(3) ,command.callsign, command.eet, command.eobt, command.departure, command.arrival, ConvertTimes.EobtToDateTime(command.eobt, DateTime.Now.AddDays(1)), command.aircraft);
 
             // Salva no banco
             _repository.Create(flight);
