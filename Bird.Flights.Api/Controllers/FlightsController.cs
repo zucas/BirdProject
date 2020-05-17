@@ -43,7 +43,7 @@ namespace Bird.Flights.Api.Controllers {
         )
         {
 
-            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights?company=TAM");
+            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights");
             var data = await response.Content.ReadAsStreamAsync();
             var commands = await JsonSerializer.DeserializeAsync<List<CreateFlightFromMachCommand>>(data);
             foreach(var command in commands)

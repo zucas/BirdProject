@@ -45,8 +45,8 @@ namespace Bird.Flights.Domain.Commands
                     .HasMinLen(FlightNumber, 1, "FlightNumber", "The Flight Number must be 1 or more chars")
                     .HasMaxLen(FlightNumber, 4, "FlightNumber", "The Flight Number must be 4 or less chars")
                     .HasLen(IcaoCode, 3, "IcaoCode", "The ICAO Code is incorrect")
-                    .HasLen(Departure, 3, "Departure", "The Departure IATA Code is incorrect")
-                    .HasLen(Arrival, 3, "Arrival", "The Arrival IATA Code is incorrect")
+                    .HasLen(Departure, 4, "Departure", "The Departure ICAO Code is incorrect")
+                    .HasLen(Arrival, 4, "Arrival", "The Arrival ICAO Code is incorrect")
                     .IsGreaterThan(Sta, Std, "Sta", "STA must be after STD")
                     .IsNotNull(AircraftType, "Aircraft", "Select the Aircraft")
             );

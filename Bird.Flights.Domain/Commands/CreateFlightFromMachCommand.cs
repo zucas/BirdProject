@@ -28,7 +28,12 @@ namespace Bird.Flights.Domain.Commands
             AddNotifications(
                 new Contract()
                     .Requires()
-                    .HasMinLen(callsign, 1, "callsign", "The Flight Number must be 1 or more chars")
+                    .Requires()
+                    .HasLen(company, 3, "company", "The company must be 3 chars")
+                    .HasLen(departure, 4, "departure", "The departure must be 4 chars")
+                    .HasLen(arrival, 4, "arrival", "The arrival must be 4 chars")
+                    .HasMaxLen(callsign, 7, "callsign", "The callsign must be 7 or less chars")
+                    .HasMinLen(callsign, 4, "callsign", "The callsign must be 4 or more chars")
             );
         }
     }

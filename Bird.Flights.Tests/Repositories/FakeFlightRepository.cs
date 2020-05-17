@@ -19,7 +19,7 @@ namespace Bird.Flights.Tests.Repositories
 
         Flight IFlightRepository.GetById(Guid id)
         {
-            return new Flight("LA", "3000", "TAM3000", "1600", "0100","CWB", "CGH", DateTime.Now.AddHours(-1), "A320");
+            return new Flight("LA", "3000", "TAM3000", "1600", "0100","SBCT", "SBSP", DateTime.Now.AddHours(-1), "A320");
         }
 
         IEnumerable<Flight> IFlightRepository.GetByPeriod(DateTime date)
