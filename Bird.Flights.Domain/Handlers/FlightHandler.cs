@@ -28,13 +28,11 @@ namespace Bird.Flights.Domain.Handlers
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
 
             var flight = new Flight(command.IcaoCode, command.FlightNumber, command.IcaoCode + command.FlightNumber, command.Eet, command.Eobt, command.Departure, command.Arrival, ConvertTimes.EobtToDateTime(command.Eobt, DateTime.Now.AddDays(1)), command.AircraftType);
-
-            // Salva no banco
             _repository.Create(flight);
-
-            // Retorna o resultado
             return new GenericCommandResult(true, "Flight save!", flight);
         }
+
+        
 
         public ICommandResult Handle(CreateFlightFromMachCommand command)
         {
@@ -42,12 +40,28 @@ namespace Bird.Flights.Domain.Handlers
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
             var flight = new Flight(command.company, command.callsign.Substring(3) ,command.callsign, command.eet, command.eobt, command.departure, command.arrival, ConvertTimes.EobtToDateTime(command.eobt, DateTime.Now.AddDays(1)), command.aircraft);
-
-            // Salva no banco
             _repository.Create(flight);
-
-            // Retorna o resultado
             return new GenericCommandResult(true, "Flight save!", flight);
+        }
+
+        public ICommandResult Handle(UpdateFlightCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
+
+            var flight = new Flight(command.IcaoCode, command.FlightNumber, command.IcaoCode + command.FlightNumber, command.Eet, command.Eobt, command.Departure, command.Arrival, ConvertTimes.EobtToDateTime(command.Eobt, DateTime.Now.AddDays(1)), command.AircraftType);
+            _repository.Update(flight);
+            return new GenericCommandResult(true, "Flight updated!", flight);
+        }
+
+        public ICommandResult Handle(DeleteFlightCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
+            _repository.Delete(command.Id);
+            return new GenericCommandResult(true, "Flight Deleted!", null);
         }
     }
 }

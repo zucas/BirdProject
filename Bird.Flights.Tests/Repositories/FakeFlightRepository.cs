@@ -7,6 +7,11 @@ namespace Bird.Flights.Tests.Repositories
 {
     public class FakeFlightRepository : IFlightRepository
     {
+        public void Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Flight> GetBy(List<string> atributes, List<string> payload)
         {
             throw new NotImplementedException();

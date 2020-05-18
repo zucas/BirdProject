@@ -9,6 +9,7 @@ namespace Bird.Flights.Domain.Repositories
     {
         void Create(Flight flight);
         void Update(Flight flight);
+        void Delete(Guid id);
         Flight GetById(Guid id);
         IEnumerable<Flight> GetAll( DateTime? beginDate , DateTime? endDate);
         IEnumerable<Flight> GetByCompany(string company,  DateTime? beginDate , DateTime? endDate);

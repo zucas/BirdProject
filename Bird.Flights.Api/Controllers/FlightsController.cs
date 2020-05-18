@@ -62,6 +62,26 @@ namespace Bird.Flights.Api.Controllers {
         {
             return (GenericCommandResult)handler.Handle(command);
         }
+
+        [Route("")]
+        [HttpPut]
+        public GenericCommandResult Update(
+           [FromBody]UpdateFlightCommand command,
+           [FromServices]FlightHandler handler
+       )
+        {
+            return (GenericCommandResult)handler.Handle(command);
+        }
+
+        [Route("")]
+        [HttpDelete]
+        public GenericCommandResult Delete(
+            [FromBody]DeleteFlightCommand command,
+            [FromServices]FlightHandler handler
+        )
+        {
+            return (GenericCommandResult)handler.Handle(command);
+        }
         
         [Route("import/mach")]
         [HttpGet]
