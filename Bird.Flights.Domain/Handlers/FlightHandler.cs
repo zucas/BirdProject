@@ -27,7 +27,7 @@ namespace Bird.Flights.Domain.Handlers
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, this flight is wrong!", command.Notifications);
 
-            var flight = new Flight(command.IcaoCode, command.FlightNumber, command.Callsing, command.Eet, command.Eobt, command.Departure, command.Arrival, command.Std, command.AircraftType);
+            var flight = new Flight(command.IcaoCode, command.FlightNumber, command.IcaoCode + command.FlightNumber, command.Eet, command.Eobt, command.Departure, command.Arrival, ConvertTimes.EobtToDateTime(command.Eobt, DateTime.Now.AddDays(1)), command.AircraftType);
 
             // Salva no banco
             _repository.Create(flight);

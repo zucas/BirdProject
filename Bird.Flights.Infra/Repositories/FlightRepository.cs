@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bird.Flights.Domain.Entities;
+using Bird.Flights.Domain.Queries;
 using Bird.Flights.Domain.Repositories;
 using Bird.Flights.Infra.Contexts;
 
@@ -22,9 +24,29 @@ namespace Bird.Flights.Infra.Repositories {
             _context.SaveChanges();
         }
 
-        public IEnumerable<Flight> GetAll()
+        public IEnumerable<Flight> GetAll(DateTime? beginDate , DateTime? endDate)
         {
-            return _context.Flights;
+            return _context.Flights.Where(FlightQueries.GetByStdPeriod(beginDate ?? DateTime.Now.AddHours(-6), endDate ?? DateTime.Now.AddHours(6) ));
+        }
+
+        public IEnumerable<Flight> GetBy(List<string> atributes, List<string> payload)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Flight> GetByCompany(string company, DateTime? beginDate , DateTime? endDate)
+        {
+            return _context.Flights.Where(FlightQueries.GetByCompany(company)).Where(FlightQueries.GetByStdPeriod(beginDate ?? DateTime.Now.AddHours(-6), endDate ?? DateTime.Now.AddHours(6) ));
+        }
+
+        public IEnumerable<Flight> GetByCompanyAndArrival(string company, string arrival, DateTime? beginDate , DateTime? endDate)
+        {
+            return _context.Flights.Where(FlightQueries.GetByStdPeriod(beginDate ?? DateTime.Now.AddHours(-6), endDate ?? DateTime.Now.AddHours(6) )).Where(FlightQueries.GetByCompany(company)).Where(FlightQueries.GetByArrival(arrival));
+        }
+
+        public IEnumerable<Flight> GetByCompanyAndDeparture(string company, string departure, DateTime? beginDate , DateTime? endDate)
+        {
+            return _context.Flights.Where(FlightQueries.GetByCompany(company)).Where(FlightQueries.GetByDeparture(departure)).Where(FlightQueries.GetByStdPeriod(beginDate ?? DateTime.Now.AddHours(-6), endDate ?? DateTime.Now.AddHours(6) ));
         }
 
         public Flight GetById(Guid id)
@@ -32,7 +54,7 @@ namespace Bird.Flights.Infra.Repositories {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Flight> GetByPeriod(DateTime date)
+        public IEnumerable<Flight> GetByPeriod(DateTime beginDate, DateTime endDate)
         {
             throw new NotImplementedException();
         }

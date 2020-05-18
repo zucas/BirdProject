@@ -8,8 +8,8 @@ namespace Bird.Flights.Tests.CommandTests
     [TestClass]
     public class CreateFlightCommandTest
     {
-        private readonly CreateFlightCommand _invalidFlight = new CreateFlightCommand("TAM", "3000", "TAM3000", "1600", "0100", "", "SBSP", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
-        private readonly CreateFlightCommand _validFlight = new CreateFlightCommand("TAM", "3000", "TAM3000", "1600", "0100","SBCT", "SBSP", DateTime.Now.AddHours(-1), DateTime.Now, "A320");
+        private readonly CreateFlightCommand _invalidFlight = new CreateFlightCommand("TAM", "3000", "TAM3000", "1600", "0100", "", "SBSP", DateTime.Now.AddHours(-1), "A320");
+        private readonly CreateFlightCommand _validFlight = new CreateFlightCommand("TAM", "3000", "TAM3000", "1600", "0100","SBCT", "SBSP", DateTime.Now.AddHours(-1), "A320");
 
         public CreateFlightCommandTest()
         {

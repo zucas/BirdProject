@@ -17,13 +17,40 @@ namespace Bird.Flights.Api.Controllers {
     public class FlightsController : ControllerBase {
         static readonly HttpClient client = new HttpClient();
 
-        [Route("")]
+        [Route("all")]
         [HttpGet]
         public IEnumerable<Flight> GetAll(
             [FromServices]IFlightRepository repository
         )
         {
-            return repository.GetAll();
+            return repository.GetAll(null, null);
+        }
+
+        [Route("company/{company}")]
+        [HttpGet]
+        public IEnumerable<Flight> GetByCompany(
+            [FromServices]IFlightRepository repository, string company
+        )
+        {
+            return repository.GetByCompany(company, null, null);
+        }
+
+        [Route("company/{company}/departure/{departure}")]
+        [HttpGet]
+        public IEnumerable<Flight> GetByCompanyAndDeparture(
+            [FromServices]IFlightRepository repository, string company, string departure
+        )
+        {
+            return repository.GetByCompanyAndDeparture(company, departure, null, null);
+        }
+
+        [Route("company/{company}/arrival/{arrival}")]
+        [HttpGet]
+        public IEnumerable<Flight> GetByCompanyAndArrival(
+            [FromServices]IFlightRepository repository, string company, string arrival
+        )
+        {
+            return repository.GetByCompanyAndArrival(company, arrival, null, null);
         }
 
         [Route("")]
@@ -43,7 +70,7 @@ namespace Bird.Flights.Api.Controllers {
         )
         {
 
-            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights");
+            HttpResponseMessage response = await client.GetAsync("http://us-central1-mach-app.cloudfunctions.net/api/flights?departure=SBSP");
             var data = await response.Content.ReadAsStreamAsync();
             var commands = await JsonSerializer.DeserializeAsync<List<CreateFlightFromMachCommand>>(data);
             foreach(var command in commands)
